@@ -19,7 +19,7 @@ Maak een commentaar-block met je naam en e-mail
 		<h1>Oefening Commentaar</h1>
 
 		<p> <?= 'Wim Vits'  ?></p>
-		<p> <?= 'wimvits@hotmail.com' ?> </p>
+		<!-- 'wimvits@hotmail.com' -->
 	</body>
 
 
