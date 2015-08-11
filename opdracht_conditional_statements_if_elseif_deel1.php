@@ -11,6 +11,8 @@ $getal = rand ( 1 , 100 );
 $onder = floor ($getal / 10) * 10;
 $boven = $onder + 10;
 
+$boodschap= "Het getal " . $getal . " ligt tussen de tientallen " . $onder . " en " . $boven . ".";
+$boodschap = strrev($boodschap);
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +22,8 @@ $boven = $onder + 10;
 </head>
 <body>
 	<h1>Tussen tientallen.... </h1>
-	<p>Het getal <?= $getal?> ligt tussen de tientallen <?= $onder ?> en <?= $boven ?> </p>
+	<p>Het getal <?= $getal?> ligt tussen de tientallen <?= $onder ?> en <?= $boven ?>. </p>
+	<p><?= $boodschap ?> </p>
 	
 </body>
 </html>
