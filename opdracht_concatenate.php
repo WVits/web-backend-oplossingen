@@ -11,8 +11,9 @@ Druk vervolgens het aantal karakters in $volledigeNaam af op een nieuwe lijn
 */
 
 $voornaam = "Wim";
-$achternaam = "vits";
+$achternaam = "Vits";
 $volledigenaam = $voornaam . ' ' . $achternaam;
+$aantalletters = strlen($voornaam) + strlen($achternaam);
 
 ?>
 
@@ -27,7 +28,8 @@ $volledigenaam = $voornaam . ' ' . $achternaam;
 	<body>
 		<h1>Oefening Concateneer</h1>
 
-		<p> <?= $volledigenaam  ?></p>
+		<p> Mijn volledige naam is <?= $volledigenaam  ?></p>
+		<p> Mijn volledige naam bestaat uit <?= $aantalletters  ?> letters! </p>
 		
 	</body>
 
