@@ -19,7 +19,8 @@ $newlangste = str_replace($lettertje, $cijfertje, $langsteWoord);
 
 ?>
 
-<html!>
+<!DOCTYPE html>
+<html>
 
 	<head>
 		<title>Oef String Extra Functions Deel 3</title>
@@ -35,4 +36,5 @@ $newlangste = str_replace($lettertje, $cijfertje, $langsteWoord);
 	</body>
 
 
-</html!>
+</html
+
