@@ -22,7 +22,7 @@ $newlangste = str_replace($lettertje, $cijfertje, $langsteWoord);
 <html!>
 
 	<head>
-		<title>Oef String Extra Functions Deel 2</title>
+		<title>Oef String Extra Functions Deel 3</title>
 		<meta characterset = "utf8">
 
 	</head>
