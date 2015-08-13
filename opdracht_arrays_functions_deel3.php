@@ -27,10 +27,10 @@ var_dump($arr_unique_numbers);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Opdracht Arrays Basis</title>
+	<title>Opdracht Arrays Functies - deel 3</title>
 </head>
 <body>
-	<H1>Opdracht arrays basis</H1>
+	<H1>Opdracht arrays functies - deel 3</H1>
 	<p></p>
 
 </body>
