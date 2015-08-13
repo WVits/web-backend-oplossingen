@@ -9,6 +9,7 @@ Valideer je code met de W3 Validator. Dit doe je door de source-code van je docu
 Als je code niet geldig is, maak je de nodige wijzigingen.
 */
 $output = '';
+$out = array();
 
 $boodschappenlijstje[] = 'melk';
 $boodschappenlijstje[] = 'eieren';
@@ -20,13 +21,12 @@ $boodschappenlijstje[] = 'wasverzachter';
 //var_dump($boodschappenlijstje);
 
 
-
+/*
 for ($i=0; $i < sizeof($boodschappenlijstje); $i++) { 
 	$output = $output . '<li>' . $boodschappenlijstje[$i] . '</li>';
-	//var_dump($i);
-	//var_dump($output);
-}
 
+}
+*/
 
  ?>
 
@@ -41,7 +41,12 @@ for ($i=0; $i < sizeof($boodschappenlijstje); $i++) {
 <body>
 	<h1>Looping statements: while</h1>
 	<ul>
-		<?= $output ?>
+		<!-- <?= $output ?> --> 
+
+		<?php foreach ($boodschappenlijstje as $value): ?>
+			<?= '<li> '. $value  . '</li>' ?>
+						
+		<?php endforeach ?>
 
 	</ul>
 
