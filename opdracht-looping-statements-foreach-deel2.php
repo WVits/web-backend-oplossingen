@@ -12,16 +12,18 @@ Hoeveel elk karakter voorkomt.
 */
 
 $aantalverschillende = 0;
-$charteller = array();
+//$charteller = array();
+$alfabetCharCount = array();
 
 $text = file_get_contents("text-file.txt");
 
 $textChars = str_split($text , 1 );
-sort($textChars);
-array_reverse($textChars);
+rsort($textChars);
+$textChars = array_reverse($textChars);
 
 
-
+//Alle 
+/*
 foreach ($textChars as $char) {
 	if (!isset($charteller[$char]) ) {
 		$charteller[$char] = 1;
@@ -32,13 +34,51 @@ foreach ($textChars as $char) {
 		$charteller[$char] += 1;
 	}
 
+*/
+
+//Alfabet alleen
+foreach ($textChars as $char) {
+	if ((ord($char) > 64 && ord($char) < 91) || (ord($char) > 96 && ord($char) < 122)) {
+		if (!isset($alfabetCharCount[$char]) ) {
+			$alfabetCharCount[$char] = 1;
+			++$aantalverschillende;
+		}
+		else{
+			$alfabetCharCount[$char] += 1;
+		}
+
+	}
 }
 
 //var_dump($textChars);
 var_dump($aantalverschillende);
-var_dump($charteller);
-
+//var_dump($charteller);
+var_dump($alfabetCharCount);
 var_dump($text);
 
 
 ?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Foreach oefening deel 2 </title>
+</head>
+<body>
+	<h1>Foreach oefening deel 2</h1>
+	<span>
+		<?php foreach ($alfabetCharCount as $key => $value): ?>
+			
+
+					<li> <?=  $key . ' ' . $value ?> </li>
+				
+		<?php endforeach ?>
+	</span>
+
+
+
+</body>
+</html>
