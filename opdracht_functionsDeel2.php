@@ -18,18 +18,42 @@ Voer al deze functies uit en zorg ervoor dat de resultaten op het scherm verschi
 
 ////////////// VARIABLES //////////////////////////
 
+//random ééndimensionale array afdrukken
 $arraytoprint = randomarr(rand(4, 20), rand(8, 15), rand(16, 30));
+
+
+//meerdimensionale array afdrukken:
+/*
+$arraytoprint = array();
+$arraytoprint[1] = ['a', 'b', 'c'];
+$arraytoprint[0] = ['a', 'b', 'c'];
+$arraytoprint[2] = ['a', 'b', 'c'];
+*/
+
+
 $outputstr = drukArrayAf($arraytoprint);
-var_dump($arraytoprint);
-var_dump($outputstr);
+//var_dump($arraytoprint);
+//var_dump($outputstr);
 
 ////////////// FUNCTIONS //////////////////////////
 
 function drukArrayAf($array){
-	$result ='';
+	static $result ='';
 	foreach ($array as $key => $value) {
-		$result .= $key . ' ' . $value . '. ';
+		
+		if (is_array($value)) {
+			
+			//var_dump($value);
+			drukArrayAf($value);
+
+		}
+		else{
+			//var_dump($value);
+			$result = $result . ' key: ' .  $key . ' value:' . $value ;
+		}
+
 	}
+
 	return $result;
 }
 
@@ -70,11 +94,16 @@ function randomarr($arrlength, $wordlengthmin = 10, $wordlengthmax =20){
 	<p>Random array</p>
 	<p> <?= $outputstr ?> </p>
 	<span>
-		<?php foreach ($arraytoprint as $key => $value): ?>
+		<!--<?php foreach ($arraytoprint as $key => $value): ?>
 			
 					<li> <?=  $key . ' ' . $value ?> </li>
 				
-		<?php endforeach ?>
+		<?php endforeach ?>-->
+
+		<?= $outputstr ?>
+
+
+
 	</span>
 </body>
 </html>
