@@ -6,20 +6,12 @@ Op de values van de array $artikels komt een associatieve array met daarin de vo
  'titel', 'datum', 'inhoud', 'afbeelding', 'afbeeldingBeschrijving'
 De value van deze keys stemt overeen met de inhoud van de drie artikels die je gevonden hebt.*/
 
-/*
-$array = array(
-    0 => array(
-        'name' => 'John Doe',
-        'email' => 'john@example.com'
-    ),
-    1 => array(
-        'name' => 'Jane Doe',
-        'email' => 'jane@example.com'
-    ),
-);
-*/
+
 $artikel = -1; 
 //var_dump($GLOBALS);
+
+
+///////////////// OUR HARDCODED DATABASE ... MULTI-DIMENSIONAL ARRAY CONTAINING ARTICLES
 
 $alles = array(
 	0 => array(
@@ -63,15 +55,18 @@ $alles = array(
 
 $artikels = $alles;
 
+
+//////////// FILTER ARTICLES BASED ON SEARCH .. IF ANY
+
 //has the search field been filled in? 
-if (isset($_GET["needle"])){ 
+if(( isset($_GET["needle"])) && ( $_GET["needle"] !== '')){ 
 	$artikels = array();
-
+	$needle = $_GET["needle"];
 	foreach ($alles as $key => $value) {
-//example stristr
- //if(stristr($string, 'earth') === FALSE)
 
-		if (strstr(  $value["inhoud"], $_GET["needle"]  )) //contains the search parameter, add it{}
+
+		//does het article contain the search string?
+		if (strstr(  $value["inhoud"], $needle  )) 
 		{
 			//article should be shown.
 			//var_dump($_GET["needle"] . " was found!");
@@ -84,7 +79,12 @@ if (isset($_GET["needle"])){
 			//var_dump($value["inhoud"]);
 		}
 
+		if (sizeof($artikels) === 0){
+			$artikels[0]["titel"] = "Nope... ";
+ 			$artikels[0]["afbeelding"] = "";
+ 			$artikels[0]["inhoud"] =  " No search results when searching for " . $needle;
 
+		}
 	}
 	//var_dump($artikels);
 
@@ -92,6 +92,9 @@ if (isset($_GET["needle"])){
 else{
 	$artikels = $alles;
 }
+
+
+///////// DO WE NEED ONE SPECIFIC ARTICLE? 
 
 //was a specific article chosen?
 if (isset($_GET["id"])){
@@ -102,7 +105,12 @@ if (isset($_GET["id"])){
 	else 
 	{
 		//dit artikel bestaat niet
-		var_dump("Error 404.");
+
+		//var_dump("Error 404.");
+		$artikel = array();
+		$artikel["titel"] = "Nope... ";
+ 		$artikel["afbeelding"] = "";
+ 		$artikel["inhoud"] =  " No such article.  ";
 	}
 
 }
@@ -181,7 +189,7 @@ if (isset($_GET["id"])){
 					<?= $artikel["inhoud"] ?>
 					 
 				</article>
-				
+				<a href= <?= 'oef_GET.php?' ?>> Terug naar overzicht.... </a>
 			</section>
 		
 		<?php else: ?>
@@ -200,6 +208,8 @@ if (isset($_GET["id"])){
 				</section>
 			<?php endforeach ?>
 		<?php endif ?>
+
+
 			
 		</div> <!--container -->
 	</body>
