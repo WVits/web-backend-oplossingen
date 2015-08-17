@@ -10,18 +10,6 @@ Voer al deze functies uit en zorg ervoor dat de resultaten op het scherm verschi
 
 ////////////// VARIABLES //////////////////////////
 
-//random ééndimensionale array afdrukken
-$arraytoprint = randomarr(rand(4, 20), rand(8, 15), rand(16, 30));
-
-
-//meerdimensionale array afdrukken:
-/*
-$arraytoprint = array();
-$arraytoprint[1] = ['a', 'b', 'c'];
-$arraytoprint[0] = ['a', 'b', 'c'];
-$arraytoprint[2] = ['a', 'b', 'c'];
-*/
-
 
 $outputstr = validateHtmlTag("<html> tegeagae </html>");
 //var_dump($arraytoprint);

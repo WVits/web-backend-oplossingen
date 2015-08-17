@@ -21,13 +21,17 @@ Voer al deze functies uit en zorg ervoor dat de resultaten op het scherm verschi
 //random ééndimensionale array afdrukken
 $arraytoprint = randomarr(rand(4, 20), rand(8, 15), rand(16, 30));
 
+//global counter to count the number of arrays already in the random array.
+$countarr = 0;
 
 //meerdimensionale array afdrukken:
-
+/*
 $arraytoprint = array();
 $arraytoprint[1] = ['a', 'b', 'c'];
 $arraytoprint[0] = ['a', 'b', 'c'];
 $arraytoprint[2] = ['a', 'b', 'c'];
+*/
+var_dump($arraytoprint);
 
 $outputstr = drukArrayAf($arraytoprint);
 //var_dump($arraytoprint);
@@ -47,12 +51,44 @@ function drukArrayAf($array){
 		}
 		else{
 			//var_dump($value);
-			$result = $result . ' key: ' .  $key . ' value:' . $value ;
+			$result = $result . '<li>' . ' key: ' .  $key . ' value:' . $value . '</li>';
 		}
-
 	}
-
 	return $result;
+}
+
+
+function randomvalue(){
+//	$randomvalue = '';
+
+	static $numberofarrays = 0;
+	//var_dump($numberofarrays);
+	$typeDeterminatior = rand(1,3);
+
+	switch ($typeDeterminatior) {
+		case '1':
+			return randomstring(15);
+			break;
+
+		case '2':
+			return rand(1, 1000);
+			break;
+
+		case '3':
+			++$numberofarrays;
+			//if the allowed number of arrays is too large, a fatal error will occur due to too much nesting.
+			if ($numberofarrays < 20 ){
+				return randomarr(rand(3,6));
+			}
+			else{
+				return randomvalue();
+			}
+			//return 'this should be an array';
+
+			break;
+		default:
+			break;
+	}
 }
 
 
@@ -61,11 +97,13 @@ function randomstring($length = 10){
 	return $randomString;
 }
 
+
 function randomarr($arrlength, $wordlengthmin = 10, $wordlengthmax =20){
 	$arr;
 
 	for ($key=0; $key < $arrlength ; $key++) { 
-		$arr[$key] = randomstring(rand($wordlengthmin, $wordlengthmax));
+		//$arr[$key] = randomstring(rand($wordlengthmin, $wordlengthmax));
+		$arr[$key] = randomvalue();
 	}
 	return $arr;
 }
