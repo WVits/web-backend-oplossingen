@@ -23,10 +23,16 @@ $time = mktime($uren, $minuten, $seconden, $maandvolgnummer, $dagvdmaand , $jaar
 
 /*setlocale(LC_ALL, 'nl_NL');*/
 //setlocale(LC_ALL, 'nl_NL');
+
+
+///////////OPGELET : onderstaande lijn is windows-specifiek
 setlocale(LC_ALL, 'nld_nld');
 
+//////////// voor *nix systemen (o.a. mac)
+//////// setlocale(LC_ALL, "nl_NL");
+
 //string strftime ( string $format [, int $timestamp = time() ] )
-$localdate = strftime('%d, %B, %Y', $time)
+$localdate = strftime('%d, %B, %Y, %H:%M:%S %p', $time)
 
 
  ?>
