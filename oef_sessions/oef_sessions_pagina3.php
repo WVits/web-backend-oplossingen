@@ -2,27 +2,13 @@
 	
 	session_start();
 
-
-	$nickname = "";
-	$email ="";
-	var_dump($_SESSION);
-	if (isset($_POST["submit"])){
-		var_dump("ok");	
-	}
-
+	$nickname = $_SESSION["nickname"];
+	$email = $_SESSION["email"];
+	$postcode = $_SESSION["postcode"];
+	$straat = $_SESSION["straat"];
+	$nummer = $_SESSION["nummer"];
+	$gemeente =$_SESSION["gemeente"];
 	
-	if (isset($_POST["submit"])){
-		var_dump("ok");
-
-		
-		foreach ($_POST as $key => $value) {
-			$_SESSION[$key] = $_POST[$key];
-		}
-			
-		var_dump($_SESSION);
-		header('location: oef_sessions_pagina3.php');
-		
-	}
  ?>
 
  <!DOCTYPE html>
@@ -58,27 +44,28 @@
  <body>
  	<div class="container">
  		<h1>Overzichtspagina</h1>
-
  		<hr>
 
  		<h2> Registratiegegevens </h2>
  		<hr>
+
  		<section>
  		
- 			<p>Email : <span> <?= $email ?> </span> </p>
- 			<p>Nickname: <span> <?= $nickname?> </span> </p>
+ 			<p>Email : <span> <?=$email?> </span> <a href="oef_sessions_pagina1.php?focus=email" >Wijzig</a> </p>
+ 			<p>Nickname: <span> <?=$nickname?> </span> <a href="oef_sessions_pagina1.php?focus=nickname" >Wijzig</a> </p>
  		
  		</section>
+
  		<hr>
  		<h2>Adresgegevens </h2>
  		<hr>
 
  		<section>
  		
-			<p>Straat : <span> <?= $email ?> </span>  <a href="" >Wijzig</a> </p>
- 			<p>Huisnummer: <span> <?= $nickname?> </span> <a href="" >Wijzig</a>  </p> 
- 			<p>Postcode : <span> <?= $email ?> </span> <a href="" >Wijzig</a>  </p>
- 			<p>Gemeente: <span> <?= $nickname?> </span> <a href="" >Wijzig</a> </p>		
+			<p>Straat : <span> <?=$straat?> </span>  <a href="oef_sessions_pagina2.php?focus=straat" >Wijzig</a> </p>
+ 			<p>Huisnummer : <span> <?=$nummer?> </span> <a href="oef_sessions_pagina2.php?focus=nummer" >Wijzig</a>  </p> 
+ 			<p>Postcode : <span> <?=$postcode?> </span> <a href="oef_sessions_pagina2.php?focus=postcode" >Wijzig</a>  </p>
+ 			<p>Gemeente : <span> <?=$gemeente?> </span> <a href="oef_sessions_pagina2.php?focus=gemeente" >Wijzig</a> </p>		
  		</section>
 	</div>
 

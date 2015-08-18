@@ -1,15 +1,33 @@
 <?php 
-	
-	if (isset($_POST["submit"])){
-		var_dump("ok");
+	session_start();
+	$email = '';
+	$nickname = '';
+	$focus='';
 
-		session_start();
+
+	if (isset($_POST["submit"])){
+		//var_dump("ok");
+
 		$_SESSION = $_POST;
 
-	
-		var_dump($_SESSION);
+		//var_dump($_SESSION);
 		header('location: oef_sessions_pagina2.php');
 	}
+
+	// invullen van reeds gekende waarden 
+	if (isset($_SESSION["email"]))
+	{
+		$email = $_SESSION["email"];
+		$nickname = $_SESSION["nickname"];
+	}
+
+	//moet er een focus op een bepaald veld gezet worden?
+	if (isset($_GET["focus"]))
+	{
+		//var_dump("focus op " . $_GET["focus"]);
+		$focus = $_GET["focus"];
+	}
+
 
  ?>
 
@@ -48,10 +66,12 @@
 	
  		<form method="post" >
  			<p>
- 				<label for="email"> E-mail  </label><input type="text" id="email" name="email">
+ 				<label for="email">E-mail</label>
+ 				<input <?= ( $focus == "email" ) ? 'autofocus' : '' ?> type="text" id="email" name="email" value="<?=$email?>">
  			</p>
  			<p>
- 				<label for="nickname"> Nickname  </label><input type="text" id="nickname" name="nickname">
+ 				<label for="nickname">Nickname</label>
+ 				<input <?= ( $focus == "nickname" ) ? 'autofocus' : ''?>  type="text" id="nickname" name="nickname" value="<?=$nickname?>" >
  			</p>
  			<p>
  				<input type ="submit" value="Volgende" name="submit" id="submit">

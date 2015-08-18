@@ -3,17 +3,35 @@
 	session_start();
 
 
+	//var_dump for testing purposes....
+	//var_dump($_SESSION);
+
+	//initialising variables
+	$nickname = '';
+	$email = '';
+	$postcode = '';
+	$straat = '';
+	$nummer = '';
+	$gemeente ='';
+	$focus ='';
+	
+	//invullen van de (in principe "zeker") gekende waarden
 	$nickname = $_SESSION["nickname"];
 	$email = $_SESSION["email"];
 	
-	var_dump($_SESSION);
 
-
-	if (isset($_POST["submit"])){
-		var_dump("ok");	
+	// invullen van reeds gekende waarden in invulvelden
+	if (isset($_SESSION["nummer"]))
+	{
+		$postcode = $_SESSION["postcode"];
+		$straat = $_SESSION["straat"];
+		$nummer = $_SESSION["nummer"];
+		$gemeente =$_SESSION["gemeente"];
+	
 	}
 
 	
+	//on submit, we add every filled in field to our $_SESSION array. 
 	if (isset($_POST["submit"])){
 		var_dump("ok");
 
@@ -26,6 +44,16 @@
 		header('location: oef_sessions_pagina3.php');
 		
 	}
+
+	//moet de focus op een bepaald veld?
+	if (isset($_GET["focus"]))
+	{
+	//	var_dump("focus op " . $_GET["focus"]);
+		$focus = $_GET["focus"];
+	}
+
+
+
  ?>
 
  <!DOCTYPE html>
@@ -63,10 +91,11 @@
  	<div class="container">
  		<h1>Registratie: Deel 2, adresgegevens</h1>
  		<hr>
+
  		<section>
  		<h2> Registratiegegevens </h2>
- 			<p>Email : <span> <?= $email ?> </span> </p>
- 			<p>Nickname: <span> <?= $nickname?> </span> </p>
+ 			<p>Email : <span> <?=$email?> </span> </p>
+ 			<p>Nickname: <span> <?=$nickname?> </span> </p>
  		
  		</section>
  		<hr>
@@ -76,16 +105,20 @@
 	
  		<form method="post" >
  			<p>
- 				<label for="straat"> Straatnaam </label><input type="text" id="straat" name="straat">
+ 				<label for="straat"> Straatnaam </label>
+ 				<input <?= ( $focus == "straat" ) ? 'autofocus' : '' ?> type="text" id="straat" name="straat"  value="<?=$straat?>">
  			</p>
  			<p>
- 				<label for="nummer"> Nummer  </label><input type="text" id="nummer" name="nummer">
+ 				<label for="nummer"> Nummer  </label>
+ 				<input  <?= ( $focus == "nummer" ) ? 'autofocus' : '' ?> type="text" id="nummer" name="nummer" value="<?=$nummer?>">
  			</p>
  			<p>
- 				<label for="postcode"> Postcode  </label><input type="number" id="postcode" name="postcode">
+ 				<label for="postcode"> Postcode  </label>
+ 				<input  <?= ( $focus == "postcode" ) ? 'autofocus' : '' ?> type="text" id="postcode" name="postcode" value="<?=$postcode?>">
  			</p>
- 			<p>
- 				<label for="gemeente"> Gemeente  </label><input type="text" id="gemeente" name="gemeente">
+ 			<p> 
+ 				<label for="gemeente"> Gemeente  </label>
+ 				<input  <?= ( $focus == "gemeente" ) ? 'autofocus' : '' ?>  type="text" id="gemeente" name="gemeente" value="<?=$gemeente?>">
  			</p>
  			<p>
  				<input type ="submit" value="Volgende" name="submit" id="submit">
