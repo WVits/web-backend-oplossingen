@@ -2,13 +2,21 @@
 	
 	session_start();
 
-	$nickname = $_SESSION["nickname"];
-	$email = $_SESSION["email"];
-	$postcode = $_SESSION["postcode"];
-	$straat = $_SESSION["straat"];
-	$nummer = $_SESSION["nummer"];
-	$gemeente =$_SESSION["gemeente"];
-	
+	$nickname = '';
+	$email='';
+	$postcode = '';
+	$straat= '';
+	$nummer ='';
+	$gemeente ='';
+
+	if(isset($_SESSION["nickname"])){
+		$nickname = $_SESSION["nickname"];
+		$email = $_SESSION["email"];
+		$postcode = $_SESSION["postcode"];
+		$straat = $_SESSION["straat"];
+		$nummer = $_SESSION["nummer"];
+		$gemeente =$_SESSION["gemeente"];
+	}
  ?>
 
  <!DOCTYPE html>
