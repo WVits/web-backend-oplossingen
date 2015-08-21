@@ -34,25 +34,26 @@ session_start();
 		if (zitInMand($mand, key($artikelnaam))){
 			//eentje bijtellen
 			++$mand[key($artikelnaam)];
-			var_dump("++");
+			//var_dump("++");
 		}else{
 			//toevoegen
-			var_dump($mand);
-			var_dump(key($artikelnaam));
+			//var_dump($mand);
+			//var_dump(key($artikelnaam));
 			$mand[key($artikelnaam)] = 1;
 		}
 		return $mand;
 	}
-/*
+
 	function verwijderArtikel($mand, $artikelnaam){
-		if (zitInMand($mand, $artikelnaam) > 1){
+		if (zitInMand($mand, key($artikelnaam)) > 1){
 			//eentje verwijderen
+			--$mand[key($artikelnaam)];
 		}else{
-			//
+			unset($mand[key($artikelnaam)]);
 		}
 		return $mand;
 	}
-*/
+
 
 	function zitInMand($mand, $artikelnaam){
 		$inMand = FALSE;
@@ -81,9 +82,22 @@ session_start();
 		$winkelmand = hervulMand($winkelmand, $_SESSION["winkelmand"]);
 	}
 //check of er op een toevoegen knop geklikt werd... 
-	if (isset($_POST)){
-		var_dump($_POST);
-		$winkelmand = voegArtikelToe($winkelmand, $_POST);
+	if (isset($_POST))
+	{
+		//var_dump($_POST);
+		foreach ($_POST as $key => $value) 
+		{
+			if ($value === "delete") //er is op delete gedrukt bij een item...
+			{
+				unset($winkelmand[$key]);
+			}else{
+				if($value == "-1"){
+					$winkelmand = verwijderArtikel($winkelmand, $_POST);
+				}else{
+					$winkelmand = voegArtikelToe($winkelmand, $_POST);
+				}	
+			}
+		}
 	}
 
 
@@ -119,11 +133,13 @@ session_start();
 	<h2> Reeds in uw mandje ...</h2>
 	<form method="post">
 		<?php foreach ($winkelmand as $key => $value): ?>
-			<button name="<?= 'x' . $key?>"> x </button>
-			<p> Naam <?= $key ?> Aantal <?= $value ?></p>
-			<button> + </button>
-			<button> - </button>
-
+			
+			<p> 
+				Naam <?= $key ?> Aantal <?= $value ?>
+				<button name="<?=$key?>" value="delete"> x </button>
+				<button name="<?=$key?>" value="1"> + </button>
+				<button name="<?=$key?>" value="-1"> - </button>
+			</p>
 		<?php endforeach ?>
 
 	</form>
