@@ -18,22 +18,32 @@ session_start();
 		return $inventory;
 	}
 
+	function hervulMand($legemand, $vollemand){
+		if (isset($vollemand)){
+			$legemand = $vollemand;
+		}
+		return $legemand;
+	}
 
 	function maakleeg($winkelmand){
-		$winkelmand = null;
+		$winkelmand = array();
 	}
 
 
-	function voegArtikelToe($mand, $artikel){
-		if (zitInMand($mand, $artikelnaam)){
+	function voegArtikelToe($mand, $artikelnaam){
+		if (zitInMand($mand, key($artikelnaam))){
 			//eentje bijtellen
+			++$mand[key($artikelnaam)];
+			var_dump("++");
 		}else{
 			//toevoegen
-			$mand[$artikelnaam] = 1;
+			var_dump($mand);
+			var_dump(key($artikelnaam));
+			$mand[key($artikelnaam)] = 1;
 		}
 		return $mand;
 	}
-
+/*
 	function verwijderArtikel($mand, $artikelnaam){
 		if (zitInMand($mand, $artikelnaam) > 1){
 			//eentje verwijderen
@@ -42,14 +52,7 @@ session_start();
 		}
 		return $mand;
 	}
-
-
-	function hervulMand($legemand, $vollemand){
-		if (isset($vollemand)){
-			$legemand = $vollemand;
-		}
-		return $legemand;
-	}
+*/
 
 	function zitInMand($mand, $artikelnaam){
 		$inMand = FALSE;
@@ -59,9 +62,7 @@ session_start();
 			if ($artikelnaam == $naamkey){
 				$inMand= $value;
 			}
-
 		}
-
 		return $inMand;
 	}
 
@@ -75,13 +76,14 @@ session_start();
 	$inventory = zetArtikelenInWinkel($inventory);
 
 // check of er al items in de winkelmand zitten
-	$winkelmand = hervulMand($winkelmand, $_SESSION["winkelmand"]);
-
+	$winkelmand = array();
+	if (isset($_SESSION["winkelmand"])){
+		$winkelmand = hervulMand($winkelmand, $_SESSION["winkelmand"]);
+	}
 //check of er op een toevoegen knop geklikt werd... 
-	if (isset($_POST["voegtoe"])){
+	if (isset($_POST)){
 		var_dump($_POST);
-		$winkelmand = voegArtikelToe($winkelmand, $_POST["voegtoe"]);
-	
+		$winkelmand = voegArtikelToe($winkelmand, $_POST);
 	}
 
 
