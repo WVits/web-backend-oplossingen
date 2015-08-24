@@ -69,7 +69,7 @@ $titleArr = $resultset[0];
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Bieren</title>
+	<title>Brouwers</title>
 
 	<?php foreach ($css as $cssnr => $cssvalue): ?>
 		<link rel="stylesheet" type="text/css" href="<?=$cssvalue?>">
@@ -82,7 +82,7 @@ $titleArr = $resultset[0];
 
 </head>
 <body>
-	<h1>Bieren</h1>
+	<h1>Brouwers</h1>
 
 	<table>
 		<thead>
@@ -91,17 +91,23 @@ $titleArr = $resultset[0];
 				<?php foreach ($titleArr as $keyName => $DontUse): ?>
 					<th> <?= $keyName ?></th>
 				<?php endforeach ?>
+				<th> DELETE </th>
 			</tr>
 		</thead>
 
 		<tbody>
 			<?php foreach ($resultset as $key => $Record): ?>
-				<tr class=" <?= ( $key % 2 ===0 ) ? 'even' : 'odd' ?>">
-					<td><?=$key?></td>
-					<?php foreach ($Record as $fieldkey => $fieldvalue): ?>
-						<td><?= $fieldvalue ?> </td>
-					<?php endforeach ?>
-				</tr>
+
+				<form action="index.php" method="post">
+					<tr class=" <?= ( $key % 2 ===0 ) ? 'even' : 'odd' ?>">
+						<td><?=$key?></td>
+						<?php foreach ($Record as $fieldkey => $fieldvalue): ?>
+							<td><?= $fieldvalue ?> </td>
+						<?php endforeach ?>
+						<td> <input class="table-img" type="image"img src="img/trash_green.png" value = " <?= $key ?> " alt="submit" > </td>
+					</tr>
+				</form>
+
 			<?php endforeach ?>
 
 		</tbody>

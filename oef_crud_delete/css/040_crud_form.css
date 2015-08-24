@@ -14,3 +14,7 @@ tr.odd{
 	background: #AAA;
 	color: #000;
 }
+
+.table-img{
+	max-width: 50px;
+}
