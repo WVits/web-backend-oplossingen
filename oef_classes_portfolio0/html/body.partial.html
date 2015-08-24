@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Portfolio</title>
+
+	<!-- Dynamisch toegevoegde CSS-->
+	<?php foreach ($css as $key => $value): ?>
+		<link rel="stylesheet" type="text/css" href="<?=$value?>">		
+	<?php endforeach ?>
+
+	<!--statisch toegevoegde css-->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+	<!--dynamisch toegevoegde javascripts -->
+	<?php foreach ($js as $key => $value): ?>
+		<script src="<?=$value?>"></script>
+	<?php endforeach ?>
+	
+	<!--statisch toegevoegde js-->
+	<script src="js/myscript.js"></script>
+	<meta charset="utf-8" /> 
+
+</head>
+
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li> <a href="" title="Home"> Home </a> </li>
+				<li> <a href="" title="contactpage"> Contact </a> </li>
+				<li> <a href="" title="Portfolio"> Portfolio </a> </li>
+				<li> <a href="" title="blog"> Blog </a> </li>
+			</ul>
+		</nav>		
+	</header>
+
+
+	<div class="container">
+	
+		<section>
+			<img src="img/Lego-Star-Wars.jpg" alt="foto in de kijker"> 
+		</section>
+
+		<aside> 
+			<div id="bio">
+
+			<p> name </p>
+			<p> profession </p>
+			<p> experience </p>
+
+
+			</div> <!-- some personal information-->
+
+		</aside>
+	</div>
+
+
+	<footer>
+			<p>All rights reserved.</p>
+	</footer>
+
+
+</body>
+
+
+
+</html>

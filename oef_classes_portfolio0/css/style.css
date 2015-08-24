@@ -1,0 +1,44 @@
+img{
+
+	max-width: 98%;
+	padding: 1%;
+}
+
+section{
+	display: block;
+	float: left;
+	max-width: 64%;
+	/*background: #777;*/
+}
+
+aside{
+	display: block;
+	float: left;
+	max-width : 30%;
+}
+
+div.container {
+	border: 1px solid #000000;
+	overflow: hidden;
+	width: 100%;
+}
+
+nav li{
+    display:inline-block;
+    vertical-align: top;
+    max-width: 20%;
+    min-width: 15%;
+
+    float: left;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+
+body{
+	clear: both;
+}
+
+footer{
+	text-align: center;
+}
