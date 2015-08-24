@@ -1,0 +1,16 @@
+/*crud_table_style.css*/
+
+th{
+	background: #333;
+	color : #FFF;
+}
+
+tr{
+	background: #CCC;
+	color:#000;
+}
+
+tr.odd{
+	background: #AAA;
+	color: #000;
+}
