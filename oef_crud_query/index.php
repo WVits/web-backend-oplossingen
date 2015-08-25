@@ -101,7 +101,7 @@ $titleArr = $resultset[0];
 		<tbody>
 			<?php foreach ($resultset as $key => $Record): ?>
 				<tr class=" <?= ( $key % 2 ===0 ) ? 'even' : 'odd' ?>">
-					<td><?=$key?></td>
+					<td><?= ($key + 1) ?></td>
 					<?php foreach ($Record as $fieldkey => $fieldvalue): ?>
 						<td><?= $fieldvalue ?> </td>
 					<?php endforeach ?>
