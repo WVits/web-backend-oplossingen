@@ -13,6 +13,9 @@ $jsfinder = new FileFinder();
 $js = $jsfinder->FindEm("js/", "*.{js}");
 
 
+$askconfirm= FALSE; // Geen $warning tonen
+$warning = "Let op, bent u zeker dat u deze brouwer wilt verwijderen?";
+
 $cssfinder = new FileFinder();
 $css = $cssfinder->FindEm("css/", "*.{css}");
 
@@ -22,7 +25,7 @@ $currentpage = basename( $_SERVER["PHP_SELF"] );
 $messageContainer	=	'';
 $querystring = "
 				
-				SELECT * FROM `brouwers` ";
+				SELECT * FROM `brouwers` ORDER BY brouwernr DESC";
 
 try{
 
@@ -49,18 +52,59 @@ if (isset($_POST)){
 */
 	$connectie = new PDO('mysql:host=localhost;dbname=bieren', 'root', ''); // Connectie maken
 	$messageContainer='connectie OK.';
+
+	if (isset($_POST["confirm"])){ /// inderdaad, de record mag verwijderd worden....
+		var_dump($_POST);
+
+		$querydeletestring = "DELETE FROM brouwers WHERE brouwernr = :brouwernr LIMIT 1";
+		$querydelete = $connectie->prepare($querydeletestring);
+
+		//file_put_contents("log.txt", 'confirmed');
+		//var_dump('confirmed');
+		$querydelete->bindValue(':brouwernr', $_POST['brouwernr']);
+		$querydelete->execute();
+	
+
+			//CONTROLE UITVOEREN 
+		$querycontrolestring = "SELECT brouwernr FROM brouwers WHERE brouwernr = :brouwernr";
+		$querycontrole = $connectie->prepare($querycontrolestring);
+		$querycontrole->bindValue(':brouwernr', $_POST['brouwernr']);
+
+		$resultaat = $querycontrole->execute();
+		file_put_contents("log.txt",  $resultaat["brouwernr"] );
+
+		if ($resultaat["brouwernr"] === $_POST['brouwernr']){
+			var_dump("Brouwer met nummer " . $resultaat["brouwernr"] . " kan niet verwijderd worden.");
+			file_put_contents("log.txt",  $resultaat );
+		}
+
+		unset($_POST['brouwernr']);	
+		unset($_POST['confirm']);
+
+
+
+
+	}
+
+	if (isset($_POST["cancel"])){
+		$askconfirm = FALSE;
+		$selectedBrouwer = "";
+		var_dump($_POST);
+		unset($_POST['cancel']);
+		unset($_POST['brouwernr']);
+	}
+
+
 ////////////////// DELETE : brouwer met het brouwernr dat gelijk is aan de POST-waarde.
 if (isset($_POST['brouwernr'])){
-	//var_dump($_POST);
+	var_dump($_POST);
 
-	$querydeletestring = "DELETE FROM brouwers WHERE brouwernr = :brouwernr LIMIT 1";
-	//var_dump($querystring);
+	////////////// GEEF WAARSCHUWING, VRAAG BEVESTIGING
 
-
-	$querydelete = $connectie->prepare($querydeletestring);
-	$querydelete->bindValue(':brouwernr', $_POST['brouwernr']);
-	$querydelete->execute();
+	$askconfirm = TRUE; 
+	$selectedBrouwer = $_POST["brouwernr"];
 }
+
 
 
 ///////////////////////  SELECT : alle brouwers
@@ -68,7 +112,6 @@ if (isset($_POST['brouwernr'])){
 	//$connectie = new PDO('mysql:host=localhost;dbname=bieren', 'root', ''); // Connectie maken
 	//$messageContainer='connectie OK.';
 	
-
 	$query = $connectie->prepare($querystring);
 	// Een query uitvoeren
 	$query->execute();
@@ -104,6 +147,10 @@ if (isset($_POST)){
 }
 */
 //var_dump($messageContainer);
+
+
+
+
 ?>
 
 
@@ -126,6 +173,19 @@ if (isset($_POST)){
 <body>
 	<h1>Brouwers</h1>
 
+	<form method="post"> 
+
+		<?php if ($askconfirm === true): ?>
+			<p><?= $warning  . $_POST["brouwernr"] ?>
+				<input type="submit" value="confirm" name="confirm">
+				<input type="submit" value="cancel" name="cancel">
+				<input type="hidden" value="<?= $selectedBrouwer ?>" name="brouwernr">
+			</p>
+		<?php endif ?>
+		
+	</form>
+
+
 	<table>
 		<thead>
 			<tr>
@@ -136,6 +196,7 @@ if (isset($_POST)){
 				<th> DELETE </th>
 			</tr>
 		</thead>
+
 
 		<tbody>
 			<?php foreach ($resultset as $key => $Record): ?>
@@ -153,7 +214,7 @@ if (isset($_POST)){
 								type="image" 
 								src="img/trash_green.png" 
 								value = " <?= $Record["brouwernr"] ?> " 
-								name = " brouwernr" 
+								name = "brouwernr" 
 								alt="submit" > 
 						</td>
 

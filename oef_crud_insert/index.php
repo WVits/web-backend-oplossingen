@@ -18,7 +18,7 @@ $css = $cssfinder->FindEm("css/", "*.{css}");
 
 
 $messageContainer	=	'';
-
+$message='';
 
 try
 {
