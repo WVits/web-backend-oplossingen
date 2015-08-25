@@ -22,6 +22,7 @@ $css = $cssfinder->FindEm("css/", "*.{css}");
 $currentpage = basename( $_SERVER["PHP_SELF"] );
 //var_dump($currentpage);
 
+$selectedBrouwer=126;
 $messageContainer	=	'';
 $querystring = "
 				
@@ -30,28 +31,12 @@ $querystring = "
 try{
 
 /*
-if (isset($_POST)){
-	var_dump($_POST);
-
-	$connectie = new PDO('mysql:host=localhost;dbname=bieren', 'root', ''); // Connectie maken
-	$messageContainer='connectie OK.';
-
-	$querystring = "DELETE FROM brouwers WHERE brouwernr =" . $_POST['brouwernr'] . " LIMIT 1";
-	var_dump($querystring);
-
-	$query = $connectie->prepare($querystring);
-
-			// Een query uitvoeren
-
-	//var_dump($querystring);
-	$query->execute();
-
-	//header("Location: " . $currentpage);
+i
 
 }
 */
 	$connectie = new PDO('mysql:host=localhost;dbname=bieren', 'root', ''); // Connectie maken
-	$messageContainer='connectie OK.';
+	//$messageContainer='connectie OK.';
 
 	if (isset($_POST["confirm"])){ /// inderdaad, de record mag verwijderd worden....
 		var_dump($_POST);
@@ -62,13 +47,17 @@ if (isset($_POST)){
 		//file_put_contents("log.txt", 'confirmed');
 		//var_dump('confirmed');
 		$querydelete->bindValue(':brouwernr', $_POST['brouwernr']);
-		$querydelete->execute();
+		$deleted = $querydelete->execute();
 	
+		if ($deleted){
 
-			//CONTROLE UITVOEREN 
+			$messageContainer ='De brouwer is verwijderd.'; 
+		}else{
+			$messageContainer ='De brouwer kon niet verwijderd worden.'; 
+		}
 		$querycontrolestring = "SELECT brouwernr FROM brouwers WHERE brouwernr = :brouwernr";
+		
 		$querycontrole = $connectie->prepare($querycontrolestring);
-
 		$querycontrole->bindValue(':brouwernr', $_POST['brouwernr']);
 
 		$resultaat = $querycontrole->execute();
@@ -81,10 +70,6 @@ if (isset($_POST)){
 
 		unset($_POST['brouwernr']);	
 		unset($_POST['confirm']);
-
-
-
-
 	}
 
 	if (isset($_POST["cancel"])){
@@ -104,6 +89,7 @@ if (isset($_POST['brouwernr'])){
 
 	$askconfirm = TRUE; 
 	$selectedBrouwer = $_POST["brouwernr"];
+	$messageContainer ='';
 }
 
 
@@ -137,19 +123,6 @@ catch (PDOexception $e)
 }
 
 
-/*
-////////////////// DELETE : brouwer met het brouwernr dat gelijk is aan de POST-waarde.
-if (isset($_POST)){
-	//var_dump($_POST);
-	$querystring = "DELETE FROM brouwers WHERE brouwernr =" . $_POST['brouwernr'] . " LIMIT 1";
-	//var_dump($querystring);
-	$query = $connectie->prepare($querystring);
-	$query->execute();
-}
-*/
-//var_dump($messageContainer);
-
-
 
 
 ?>
@@ -180,7 +153,7 @@ if (isset($_POST)){
 			<p><?= $warning  . $_POST["brouwernr"] ?>
 				<input type="submit" value="confirm" name="confirm">
 				<input type="submit" value="cancel" name="cancel">
-				<input type="hidden" value="<?= $selectedBrouwer ?>" name="brouwernr">
+				<input type="hidden" value="<?=$selectedBrouwer?>" name="brouwernr">
 			</p>
 		<?php endif ?>
 		
@@ -192,18 +165,23 @@ if (isset($_POST)){
 			<tr>
 				<th></th>
 				<?php foreach ($titleArr as $keyName => $DontUse): ?>
-					<th> <?= $keyName ?></th>
+					<th> <?=$keyName?></th>
 				<?php endforeach ?>
 				<th> DELETE </th>
 			</tr>
 		</thead>
 
-
+		<p><?= $messageContainer ?> </p>
 		<tbody>
 			<?php foreach ($resultset as $key => $Record): ?>
 
-				<form action= "<?=$currentpage ?>" method="post">
-					<tr class=" <?= ( $key % 2 ===0 ) ? 'even' : 'odd' ?>">
+				<form action= "<?=$currentpage?>" method="post">
+				<?php 
+			//	var_dump( $Record['brouwernr'] );
+			//	var_dump( $selectedBrouwer );
+				?>
+					<tr class="<?= ($Record["brouwernr"]===$selectedBrouwer) ? 'red' : ''?> <?= ( $key % 2 === 0 ) ? 'even' : 'odd' ?>" name= "<?=$Record["brouwernr"]?>" > 
+		
 						<td><?=($key + 1) ?></td>
 						
 						<?php foreach ($Record as $fieldkey => $fieldvalue): ?>
@@ -214,19 +192,14 @@ if (isset($_POST)){
 						<input class="table-img" 
 								type="image" 
 								src="img/trash_green.png" 
-								value = " <?= $Record["brouwernr"] ?> " 
+								value = "<?=$Record["brouwernr"]?>" 
 								name = "brouwernr" 
 								alt="submit" > 
 						</td>
-
 					</tr>
 				</form>
-
 			<?php endforeach ?>
-
 		</tbody>
-
 	</table>
-
 </body>
 </html>

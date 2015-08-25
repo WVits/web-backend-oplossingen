@@ -22,3 +22,8 @@ tr.odd{
 .selected{
 	background: red;
 }
+
+tr.red{
+	background: red;
+	height: 200px;
+}
