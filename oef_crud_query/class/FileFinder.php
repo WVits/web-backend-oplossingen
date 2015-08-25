@@ -20,6 +20,35 @@
 			//var_dump($found);
 			return $found[0];
 		}
+
+		public static function Find_Js_Css(){
+
+			$cssfinder = new FileFinder();
+			$css = $cssfinder->FindEm("css/", "*.{css}");
+			$jsfinder = new FileFinder();
+			$js = $jsfinder->FindEm("js/", "*.{js}");
+
+
+			$resources = '
+								<?php foreach ($css as $cssnr => $cssvalue): ?>
+									<link rel="stylesheet" type="text/css" href="<?=$cssvalue?>">
+								<?php endforeach ?>
+						
+								<?php foreach ($js as $jsnr => $jsvalue): ?>
+									<script src="<?=$jsvalue?>"> </script>
+								<?php endforeach ?>
+						';
+			return $resources;
+
+
+		}
+
+
+
+
+
+
+
 	}
 
 	/* EXAMPLE ON HOW TO USE THIS CLASS TO FIND IMAGES
