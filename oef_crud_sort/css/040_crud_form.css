@@ -27,3 +27,13 @@ tr.red{
 	background: red;
 	height: 200px;
 }
+
+label{
+
+	min-width : 400px;
+	margin-bottom: 0;
+}
+
+input{
+	margin-top: 1px;
+}

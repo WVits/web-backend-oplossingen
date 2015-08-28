@@ -41,7 +41,7 @@ class W_DatabaseHelper
 	public function query ($querystring, $placeholders = FALSE){
 		$statement = $this->db->prepare($querystring);
 
-		var_dump($this->db);
+		//var_dump($this->db);
 
 		if ($placeholders)
 		{
@@ -61,13 +61,26 @@ class W_DatabaseHelper
 	public function returnArray($statement){
 		
 		$resultset = array();
-		var_dump($statement);
+		//var_dump($statement);
 		while ( $row = $statement->fetch(PDO::FETCH_ASSOC) )
 		{
 			$resultset[]	=	$row;
 		}
 		return $resultset;
 
+	}
+
+	public function buildTitleArray($resultset){
+
+		$titleArray = array();
+		foreach ($resultset[0] as $key => $value) {
+			//var_dump($key);
+			$titleArray[] = $key;
+
+		}
+		//$titleArr = $resultset[0];
+		//var_dump($titleArray);
+		return $titleArray;
 	}
 
 
