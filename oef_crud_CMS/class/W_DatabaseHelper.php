@@ -38,7 +38,7 @@ class W_DatabaseHelper
 
 
 
-	public function query ($querystring, $placeholders = FALSE){
+	public function query($querystring, $placeholders = FALSE){
 		$statement = $this->db->prepare($querystring);
 
 		//var_dump($this->db);
@@ -50,7 +50,8 @@ class W_DatabaseHelper
 				$statement->bindValue($name, $value);
 			}
 		}
-		
+		//var_dump($placeholders);
+		//var_dump($querystring);
 		$statement->execute();
 		$result = $this->returnArray($statement);
 		return $result;

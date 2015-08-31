@@ -36,7 +36,8 @@ try
 	$alcohol =  "";
 
 
-
+	$ordercolumn = "biernr";
+	$orderdirection ="ASC";
 	//var_dump($currentpage);
 
 
@@ -58,14 +59,14 @@ try
 		$alcohol =  $resultset[0]["alcohol"];
 
 
-		var_dump($resultset);
+	//	var_dump($resultset);
 		unset($_POST["update"]);
 
 	}
 
 	if (isset($_POST["commit-update"]))
 	{
-		var_dump($_POST);
+		//var_dump($_POST);
 
 		$biernr = $_POST["biernr"];
 		$naam =  $_POST["naam"];
@@ -78,7 +79,7 @@ try
 
 		$resultset = $connection->query($querystring, [ ":naam"=> $naam, ":brouwernr"=> $brouwernr, ":soortnr"=> $soortnr, ":alcohol"=> $alcohol, ":biernr" => $biernr]);
 
-		var_dump("aangepast");
+		//var_dump("aangepast");
 	}
 
 
@@ -87,16 +88,39 @@ try
 
 	if (isset($_POST["delete"]))
 	{
-		var_dump("!!DELETE!!");
-		var_dump($_POST["delete"]);
+		//var_dump("!!DELETE!!");
+		//var_dump($_POST["delete"]);
 
 		$resultset = $connection->query("DELETE FROM bieren WHERE biernr = :biernr", [":biernr" => $_POST["delete"]]);
 
 	}
 
 
+	////////// Sorteren?
+
+	if (isset($_POST["asc"])){
+		//var_dump($_POST["asc"]);
+
+		$orderdirection = "ASC";
+		$ordercolumn = $_POST["asc"];
+
+		unset($_POST["asc"]);
+	}
+
+	if (isset($_POST["desc"])){
+		//var_dump($_POST["desc"]);
+
+		$orderdirection = "DESC";
+		$ordercolumn = $_POST["desc"];
+
+		unset($_POST["desc"]);
+	}
+
+
+
+
 	///////////////////////  SELECT : alle brouwers
-	$resultset = $connection->query("SELECT biernr,	naam, brouwernr, soortnr, alcohol FROM bieren ORDER BY biernr DESC");
+	$resultset = $connection->query("SELECT biernr,	naam, brouwernr, soortnr, alcohol FROM bieren ORDER BY " . $ordercolumn . " " . $orderdirection);
 	$titleArr = $connection->buildTitleArray($resultset);
 
 } //end try
@@ -135,9 +159,30 @@ $images = $imgfinder->FindEm("img/", "*.{jpg, jpeg, png, gif}");
 	<table>
 		<thead>
 			<tr>
-				<th></th>
-				<?php foreach ($titleArr as $key => $value): ?>
-					<th> <?= $value ?></th>
+				<th href="<?=$currentpage?>"></th>
+				<?php foreach ($titleArr as $key => $value): 
+				//  Titels van de kolommen plaatsen, met in elke kolom twee icoontjes om te sorteren.
+				?>
+					<th> 
+						<form  method="POST" action="<?=$currentpage ?>" >
+							<?= $value ?> 
+	
+							<input class="table-img" 
+									type="image" 
+									src="img/icon-asc.png" 
+									name = "asc" 
+									value= <?= $value ?>
+									alt="submit" > 
+	
+							<input class="table-img" 
+									type="image" 
+									src="img/icon-desc.png" 
+									name = "desc" 
+									value= <?= $value ?>
+										alt="submit" > 
+
+						</form>
+					</th>
 				<?php endforeach ?>
 				
 				<th> DELETE </th>
@@ -145,9 +190,7 @@ $images = $imgfinder->FindEm("img/", "*.{jpg, jpeg, png, gif}");
 			</tr>
 		</thead>
 
-
 		<tbody>
-
 
 			<?php //////////////////  FORM voor UPDATE... alleen als er op update is geklikt ?>
 			<?php if ($updateRecord): ?>
@@ -171,8 +214,6 @@ $images = $imgfinder->FindEm("img/", "*.{jpg, jpeg, png, gif}");
 	
 				</form>
 			<?php endif ?>
-				
-
 
 			<?php //////////////////  FORM voor tabel met alle bieren. Hierin kan je UPDATE of DELETE kiezen?>
 			<?php foreach ($resultset as $key => $Record): ?>
@@ -202,14 +243,10 @@ $images = $imgfinder->FindEm("img/", "*.{jpg, jpeg, png, gif}");
 								alt="submit" > 
 
 						</td>
-
 					</tr>
 				</form>
-
 			<?php endforeach ?>
-
 		</tbody>
-
 	</table>
 
 

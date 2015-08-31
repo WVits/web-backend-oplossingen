@@ -29,8 +29,9 @@ tr.red{
 }
 
 label{
-
+	display: block;
 	min-width : 400px;
+	height: auto;
 	margin-bottom: 0;
 }
 
@@ -43,4 +44,9 @@ th img{
 
 	width: 15px;
 	height: 15px;
+}
+
+body{
+
+	
 }
