@@ -48,8 +48,16 @@ try
 		//var_dump("!!UPDATE!!");
 		//var_dump($_POST["update"]);
 //
+		//new
+		/*$querystring = "SELECT bieren.biernr, bieren.naam, bieren.alcohol
+						INNER JOIN brouwers on bieren.brouwernr = brouwers.brouwernr
+						INNER JOIN soorten on bieren.soortnr = soorten.soortnr
+						WHERE bieren.biernr = :biernr
+		";*/
+		//endnew
 		$resultset = $connection->query("SELECT biernr, naam, brouwernr, soortnr, alcohol FROM bieren WHERE biernr = :biernr", [":biernr" => $_POST["update"]]);
-		
+		//old
+		//"SELECT biernr, naam, brouwernr, soortnr, alcohol FROM bieren WHERE biernr = :biernr"
 
 		$updateRecord = TRUE;
 		$biernr = $resultset[0]["biernr"];

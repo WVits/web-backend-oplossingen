@@ -199,8 +199,7 @@ catch (PDOexception $e)
 		<h1>Login.</h1>
 		<form  method="POST" action="<?=$currentpage ?>" >
 			<p><label for="naam" value="naam"> Naam </label> <input type="text" name="naam" value=""></p>
-			<p><label for="paswoord" value="paswoord"> Paswoord </label> <input type="text" name="paswoord" value=""> 
-			 </p>
+			<p><label for="paswoord" value="paswoord"> Paswoord </label> <input type="text" name="paswoord" value=""></p>
 	
 			<p><input type="submit" name="inloggen" value="Log in"></p>
 			<p><input type="submit" name="registreren" value="Registreer"></p>
@@ -212,9 +211,7 @@ catch (PDOexception $e)
 		<h1>Registreer nieuwe gebruiker.</h1>
 		<form  method="POST" action="<?=$currentpage ?>" >
 			<p><label for="naam" value="naam"> Geef de naam in die u wenst </label> <input type="text" name="naam" value=""></p>
-			<p><label for="paswoord" value="paswoord"> Kies een paswoord </label> <input type="text" name="paswoord" value="">
-					
-			</p>
+			<p><label for="paswoord" value="paswoord"> Kies een paswoord </label> <input type="text" name="paswoord" value=""></p>
 	
 			<p><input type="submit" name="registreerNieuweUser" value="Registreer"></p>
 			<p><input type="submit" name="registreerNieuweUser" value="Annuleer"></p>

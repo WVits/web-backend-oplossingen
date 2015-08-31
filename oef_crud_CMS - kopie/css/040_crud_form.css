@@ -1,0 +1,52 @@
+/*crud_table_style.css*/
+
+th{
+	background: #333;
+	color : #FFF;
+}
+
+tr{
+	background: #CCC;
+	color:#000;
+}
+
+tr.odd{
+	background: #AAA;
+	color: #000;
+}
+
+.table-img{
+	max-width: 50px;
+}
+
+.selected{
+	background: red;
+}
+
+tr.red{
+	background: red;
+	height: 200px;
+}
+
+label{
+	display: block;
+	min-width : 400px;
+	height: auto;
+	margin-bottom: 0;
+}
+
+input{
+	margin-top: 1px;
+}
+
+th img{
+	display: inline-block;
+
+	width: 15px;
+	height: 15px;
+}
+
+body{
+
+	
+}

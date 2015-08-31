@@ -15,6 +15,11 @@
 		header('location: ../index.php');
 	}
 
+
+
+
+
+
  ?>
 
 <!DOCTYPE html>
