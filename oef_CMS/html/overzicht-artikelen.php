@@ -2,7 +2,7 @@
 <?php 
 
 	session_start();
-
+	//var_dump(phpinfo());
 	////////// Automatisch zoeken naar klasses....
 
 	function __autoload($classname) { 
@@ -129,7 +129,7 @@
 					<form method="POST" action = <?= $currentpage ?> >
 						<h1> <?= $value["title"] ?> </h1>
 			
-						<img src="<?= "../" . $value["imagelink"] ?>" alt="image for the article">
+						<img src="thumbnail.php?file=<?='../' . $value['imagelink'] . '&width=50&height=50'?>" alt="image for the article">
 						<p class="article-date"> <?=$value["date"] ?> </p>
 						<p> <?= $value["inhoud"] ?> </p>
 						<input type="hidden" name="art_id" value="<?= $value["art_id"] ?>">
