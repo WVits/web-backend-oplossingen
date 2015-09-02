@@ -1,0 +1,29 @@
+
+
+/*// Parent Element, or Container*/
+.grid (@columns: 3, @gap: 10px, @width: 100%) {
+-moz-column-count: @columns;
+-moz-column-gap: @gap;
+-webkit-column-count: @columns;
+-webkit-column-gap: @gap;
+column-count: @columns;
+column-gap: @gap;
+width: @width;
+}
+
+/* Child Element, or Tile*/
+.grid-box (@margin-bottom: 20px) {
+display: inline-block;
+margin-bottom: @margin-bottom;
+width: 100%;
+}
+
+/*// Example: Book Shelf concept*/
+.book-shelf {
+background: #fff;
+.grid (3, 10px, 960px)
+}
+.book {
+.grid-box (15px);
+}
+
