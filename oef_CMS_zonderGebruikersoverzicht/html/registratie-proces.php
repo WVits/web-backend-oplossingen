@@ -117,10 +117,8 @@
 			$resultset = $connection->query($querystring, $bindValues);
 	
 			//var_dump($resultset);
-			$_SESSION["user"] = $resultset[0]["userid"];
+			$_SESSION["user"] = $resultset[0];
 			$_SESSION["username"] = $login;
-
-			
 		}
 
 		//return $resultmessage;

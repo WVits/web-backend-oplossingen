@@ -135,12 +135,6 @@ body {
     -webkit-box-sizing: border-box;
     box-shadow: 2px 2px 4px 0 #ccc;
 }
-
-.profilepic{
-	max-width: 300px;
-	max-width: auto;
-}
-
 /*
 @media only screen and (min-width: 400px) {
     .masonry {

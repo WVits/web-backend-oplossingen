@@ -42,7 +42,7 @@
 				
 	
 				$resultset = $connection->query($querystring, $bindValues);
-			
+				//var_dump($querystring);
 
 				$_SESSION["msg"] = FALSE;
 				//$resultset = $connection->query($querystring);
@@ -54,8 +54,7 @@
 					
 						$_SESSION["user"] = $match;
 						$_SESSION["username"] = $login;
-						//var_dump($_SESSION);	
-						$X->dump($_SESSION);
+						var_dump($_SESSION);	
 					}	
 				}
 			return $match;

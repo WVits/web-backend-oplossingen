@@ -7,7 +7,7 @@
 		class W_DebugHelper 
 		{
 			//debugmode op 1 zetten om var_dumps te tonen.
-			public static $debugmode = 1;
+			public static $debugmode = 0;
 			
 			public function __construct($debugmodevalue = 1)
 			{

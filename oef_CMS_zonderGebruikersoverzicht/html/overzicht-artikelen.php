@@ -36,9 +36,6 @@
 	}
 	else
 	{
-
-
-
 		if (isset($_POST["ArtikelAanpassen"]))
 		{
 			$_SESSION["aantepassenartikel"] = $_POST["art_id"];
@@ -55,7 +52,6 @@
 			$_SESSION["teVerwijderenArtikel"] = $_POST["art_id"];
 			header('location: verwijderartikel.php');
 		}
-
 
 
 		// Artikels ophalen...
@@ -100,11 +96,9 @@
 </head>
 <body>
 	<header>
-		<span> Ingelogd als <?= $_SESSION["username"] ?>. </span>
-	
-		<a href='toevoegform.php' title='artikel toevoegen'>Artikel toevoegen.</a>
-		<a href='wijzigprofiel.php' title='profiel aanpassen'>Profiel aanpassen.</a>
 		<a href='uitloggen.php' title='uitloggen'>Uitloggen.</a>
+		<span> Ingelogd als <?= $_SESSION["username"] ?>. </span>
+		<a href='toevoegform.php' title='artikel toevoegen'>Artikel toevoegen.</a>
 
 		<?php ////// dynamisch invoegen van alle CSS en JS bestanden ?>
 		<?php foreach ($css as $cssnr => $cssvalue): ?>
@@ -119,9 +113,8 @@
 		<meta charset="utf-8" /> 
 	</header>
 
-
-
 	<h1>Welkom <?= $_SESSION["username"]?> </h1>
+
 
 	<?php if (isset($_SESSION["msg"])) : ?>
 

@@ -99,8 +99,6 @@ try
 					$_SESSION["user"] = $match;
 					$_SESSION["username"] = $login;
 					$_SESSION["msg"] = "U bent ingelogd.";
-					$_SESSION["usertype"] = $resultset[0]["usertype"]; // Admin?
-			
 					//var_dump($_SESSION);	
 				}	
 			}
@@ -121,21 +119,7 @@ try
 			$validatedUser = $_SESSION["user"];
 			$toonLogin = FALSE;
 
-			if([$_SESSION["usertype"] === 0])
-			{
-				header("location: html/overzicht-artikelen.php");
-				var_dump("0");
-			}
-			elseif ([$_SESSION["usertype"] === 1])
-			{
-				header("location: html/overzicht-admin.php");
-				var_dump("1");
-			}
-			else
-			{
-				var_dump("ERROR");
-			}
-			
+			header("location: html/overzicht-artikelen.php");
 		}
 	}
 
@@ -177,23 +161,7 @@ try
 	if ($validatedUser){
 		$toonLogin = FALSE;
 		$registreerUser = FALSE;
-		//header("location: html/overzicht-artikelen.php");
-		var_dump($_SESSION);
-
-		if($_SESSION["usertype"] == "0")
-			{
-				header("location: html/overzicht-artikelen.php");
-				//var_dump("0");
-			}
-			elseif ($_SESSION["usertype"] == "1")
-			{
-				header("location: html/overzicht-admin.php");
-				//var_dump("1");
-			}
-			else
-			{
-				var_dump("ERROR");
-			}
+		header("location: html/overzicht-artikelen.php");
 	}
 	//var_dump($_POST);
 	//var_dump($_SESSION);

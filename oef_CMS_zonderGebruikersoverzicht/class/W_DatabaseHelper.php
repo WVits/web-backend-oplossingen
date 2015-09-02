@@ -25,6 +25,7 @@ class W_DatabaseHelper
 			//return $this->db;
 	}
 
+
 	static public function connect($databasename, $username = 'root', $password = '',  $hostname = 'localhost', $databasetype = "mysql")
 	{
 			$connection = new PDO( ($databasetype . ":host=" . $hostname . ";dbname=" . $databasename ), $username, $password); 
@@ -35,6 +36,8 @@ class W_DatabaseHelper
 			return $connection;
 	}
 
+
+
 	public function query($querystring, $placeholders = FALSE){
 		$statement = $this->db->prepare($querystring);
 
@@ -43,17 +46,11 @@ class W_DatabaseHelper
 		if (isset($placeholders)){
 			if (is_array($placeholders))
 			{
-				
-			
-					foreach ($placeholders as $name => $value) 
-					{
-						
-							$statement->bindValue($name, $value);
-						
-						
-					}
-				
-
+				//var_dump($placeholders);
+				foreach ($placeholders as $name => $value) 
+				{
+					$statement->bindValue($name, $value);
+				}
 			}
 		}
 		
@@ -63,6 +60,8 @@ class W_DatabaseHelper
 		$result = $this->returnArray($statement);
 		return $result;
 	}
+
+
 
 	public function returnArray($statement){
 		
