@@ -127,7 +127,7 @@
 							
 							//Als het bestand reeds bestaat in de map, moet er een foutboodschap getoond worden
 							$name = "1" . "$name";
-							GetAvailableName($name);
+							return GetAvailableName($name);
 					} 
 		else{
 			return $name;
