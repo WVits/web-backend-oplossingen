@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^original.php/?$ redirect.php
+RewriteRule ^original.php/(.*) redirect.php?role=admin&user=$1

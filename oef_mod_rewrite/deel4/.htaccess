@@ -1,0 +1,6 @@
+
+RewriteEngine On
+RewriteRule ^$ original.php
+RewriteRule ^original.php/?$ redirect.php
+RewriteRule ^original.php/(.*)/(.*) redirect.php?role=$1&user=$2
+RewriteRule ^original.php/(.*)$ redirect.php?role=user&user=$1

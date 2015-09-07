@@ -139,6 +139,13 @@ try
 		}
 	}
 
+	////////// Contacteer ons knop ---> naar contactpagina
+
+	if (isset($_POST["contact"])){
+		header("location: html/contactpagina.php");
+	}
+
+
 	////////// Log uit knop ---> Uitloggen
 
 	if (isset($_POST["Uitloggen"])){
@@ -264,6 +271,7 @@ catch (PDOexception $e)
 	
 			<p><input type="submit" name="inloggen" value="Log in"></p>
 			<p><input type="submit" name="registreren" value="Registreer"></p>
+			<p><input type="submit" name="contact" value="Contacteer ons"></p>
 		</form>
 	
 	<?php endif ?>
